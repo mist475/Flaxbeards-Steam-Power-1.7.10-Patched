@@ -10,6 +10,7 @@ build/
 eclipse/
 idea/
 libs/
+bin/
 .classpath
 .project
 CREDITS-fml.txt
