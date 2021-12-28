@@ -16,5 +16,9 @@ public class TinkersIntegration {
         for (ToolCore tool : TConstructRegistry.getToolMapping()) {
             TConstructClientRegistry.addEffectRenderMapping(tool, 18, "tinker", "steam", true);
         }
+        
+        MoldsCasting.addIngotRecipes();
+        MoldsCasting.addNuggetRecipes();
+        MoldsCasting.addPlateRecipes();
     }
 }
