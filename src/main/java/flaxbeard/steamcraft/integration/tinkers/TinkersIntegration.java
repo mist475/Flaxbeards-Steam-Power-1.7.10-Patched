@@ -1,7 +1,6 @@
 package flaxbeard.steamcraft.integration.tinkers;
 
 import flaxbeard.steamcraft.SteamcraftBlocks;
-
 import net.minecraft.item.ItemStack;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.client.TConstructClientRegistry;
@@ -16,6 +15,11 @@ public class TinkersIntegration {
         for (ToolCore tool : TConstructRegistry.getToolMapping()) {
             TConstructClientRegistry.addEffectRenderMapping(tool, 18, "tinker", "steam", true);
         }
+        
+        MoltenMetals.register();
+        MoltenMetals.alloying();
+        MoltenMetals.melting();
+        MoltenMetals.casting();
         
         MoldsCasting.addIngotRecipes();
         MoldsCasting.addNuggetRecipes();
