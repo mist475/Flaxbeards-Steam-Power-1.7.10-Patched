@@ -17,10 +17,6 @@ import tconstruct.library.crafting.FluidType;
 public class MoltenMetals {
 	public static Fluid brass;
 	public static Fluid zinc;
-	static ItemStack nuggetcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 27);
-	static ItemStack ingotcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 0);
-	static LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
-	static LiquidCasting basinCasting = TConstructRegistry.getBasinCasting();
 	
 	public static void register() {
 		brass = TinkerSmeltery.registerFluid("brass");
@@ -58,20 +54,26 @@ public class MoltenMetals {
 	}
 	
 	public static void casting() {
-		castingZinc();
-		castingBrass();
+		castingBasin();
+		castingTable();
 		MaterialBrass.partCasting();
 	}
 	
-	private static void castingZinc() {
-		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftIngot, 1, 1), new FluidStack(zinc, TConstruct.ingotLiquidValue), ingotcast, 80);
-		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftNugget, 1, 1), new FluidStack(zinc, TConstruct.nuggetLiquidValue), nuggetcast, 80);
+	private static void castingBasin() {
+		LiquidCasting basinCasting = TConstructRegistry.getBasinCasting();
 		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockZinc), new FluidStack(zinc, TConstruct.blockLiquidValue), 100);
+		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockZinc), new FluidStack(brass, TConstruct.blockLiquidValue), 100);
 	}
 	
-	private static void castingBrass() {
+	private static void castingTable() {
+		ItemStack nuggetcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 27);
+		ItemStack ingotcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 0);
+		LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
+		
+		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftIngot, 1, 1), new FluidStack(zinc, TConstruct.ingotLiquidValue), ingotcast, 80);
+		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftNugget, 1, 1), new FluidStack(zinc, TConstruct.nuggetLiquidValue), nuggetcast, 80);
+		
 		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftIngot, 1, 2), new FluidStack(brass, TConstruct.ingotLiquidValue), ingotcast, 80);
 		tableCasting.addCastingRecipe(new ItemStack(SteamcraftItems.steamcraftNugget, 1, 3), new FluidStack(brass, TConstruct.nuggetLiquidValue), nuggetcast, 80);
-		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockBrass), new FluidStack(brass, TConstruct.blockLiquidValue), 100);
 	}
 }
