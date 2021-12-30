@@ -2,7 +2,6 @@ package flaxbeard.steamcraft.integration.tinkers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import flaxbeard.steamcraft.SteamcraftItems;
 import flaxbeard.steamcraft.integration.CrossMod;
 import net.minecraft.block.Block;
@@ -20,7 +19,13 @@ import tconstruct.smeltery.TinkerSmeltery;
 
 public class MoldsCasting {
 
-	public static void addPlateRecipes() {
+	public static void register() {
+		addPlateRecipes();
+		addIngotRecipes();
+		addNuggetRecipes();
+	}
+	
+	private static void addPlateRecipes() {
 		String[] metals = new String[] {"copper","zinc","iron","gold","brass","thamium","terrasteel","elementium","fiery","lead","vibrant","enderium"};
 		for(int index : getPlates()) {
 			LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
@@ -68,7 +73,7 @@ public class MoldsCasting {
     	return list;
     }
 	
-	public static void addIngotRecipes() {
+	private static void addIngotRecipes() {
 		LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
 		ItemStack ingotcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 0);
 		ItemStack scIngotcast = new ItemStack(SteamcraftItems.ingotMold, 1, 0);
@@ -84,7 +89,7 @@ public class MoldsCasting {
 		}
 	}
 	
-	public static void addNuggetRecipes() {
+	private static void addNuggetRecipes() {
 		LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
 		ItemStack nuggetcast = new ItemStack(TinkerSmeltery.metalPattern, 1, 27);
 		ItemStack scNuggetcast = new ItemStack(SteamcraftItems.nuggetMold, 1, 0);

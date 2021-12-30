@@ -1,7 +1,6 @@
 package flaxbeard.steamcraft.integration.tinkers;
 
 import java.util.HashMap;
-
 import flaxbeard.steamcraft.SteamcraftItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -26,11 +25,13 @@ public class GildedIron {
 		
 		ingotGilding();
 		gilding(new ItemStack(SteamcraftItems.steamcraftPlate, 1, 2), new ItemStack(SteamcraftItems.steamcraftPlate, 1, 12), 1);
+		
 		gilding(new ItemStack(Items.iron_pickaxe), new ItemStack(tools.get("pickGildedGold")), 3);
 		gilding(new ItemStack(Items.iron_axe), new ItemStack(tools.get("axeGildedGold")), 3);
 		gilding(new ItemStack(Items.iron_shovel), new ItemStack(tools.get("shovelGildedGold")), 1);
 		gilding(new ItemStack(Items.iron_hoe), new ItemStack(tools.get("hoeGildedGold")), 2);
 		gilding(new ItemStack(Items.iron_sword), new ItemStack(tools.get("swordGildedGold")), 2);
+		
 		gilding(new ItemStack(Items.iron_helmet), new ItemStack(tools.get("helmGildedGold")), 5);
 		gilding(new ItemStack(Items.iron_chestplate), new ItemStack(tools.get("chestGildedGold")), 8);
 		gilding(new ItemStack(Items.iron_leggings), new ItemStack(tools.get("legsGildedGold")), 7);

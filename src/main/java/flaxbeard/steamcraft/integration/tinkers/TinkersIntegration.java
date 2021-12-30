@@ -17,14 +17,7 @@ public class TinkersIntegration {
         }
         
         MoltenMetals.register();
-        MoltenMetals.alloying();
-        MoltenMetals.melting();
-        MoltenMetals.casting();
-        
-        MoldsCasting.addIngotRecipes();
-        MoldsCasting.addNuggetRecipes();
-        MoldsCasting.addPlateRecipes();
-        
+        MoldsCasting.register();
         GildedIron.registerGilding();
     }
 }

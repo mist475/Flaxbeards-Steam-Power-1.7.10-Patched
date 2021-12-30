@@ -22,16 +22,21 @@ public class MoltenMetals {
 		brass = TinkerSmeltery.registerFluid("brass");
 		FluidType.registerFluidType("Brass", null, 0, 500, brass, true);
 		MaterialBrass.registerMaterial();
+		
 		zinc = TinkerSmeltery.registerFluid("zinc");
 		FluidType.registerFluidType("Zinc", null, 0, 420, zinc, true);
+		
+		alloying();
+		melting();
+		casting();
 	}
 	
-	public static void alloying() {
+	private static void alloying() {
 		Fluid copper = FluidRegistry.getFluid("copper.molten");
 		Smeltery.addAlloyMixing(new FluidStack(brass, 64), new FluidStack(copper, 48), new FluidStack(zinc, 16));
 	}
 	
-	public static void melting() {
+	private static void melting() {
 		meltingZinc();
 		meltingBrass();
 	}
@@ -53,7 +58,7 @@ public class MoltenMetals {
 		Smeltery.addDictionaryMelting("blockBrass", typeBrass, 0, TConstruct.blockLiquidValue);
 	}
 	
-	public static void casting() {
+	private static void casting() {
 		castingBasin();
 		castingTable();
 		MaterialBrass.partCasting();
@@ -62,7 +67,7 @@ public class MoltenMetals {
 	private static void castingBasin() {
 		LiquidCasting basinCasting = TConstructRegistry.getBasinCasting();
 		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockZinc), new FluidStack(zinc, TConstruct.blockLiquidValue), 100);
-		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockZinc), new FluidStack(brass, TConstruct.blockLiquidValue), 100);
+		basinCasting.addCastingRecipe(new ItemStack(SteamcraftBlocks.blockBrass), new FluidStack(brass, TConstruct.blockLiquidValue), 100);
 	}
 	
 	private static void castingTable() {
