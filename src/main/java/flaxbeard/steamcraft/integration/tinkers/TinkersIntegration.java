@@ -24,5 +24,7 @@ public class TinkersIntegration {
         MoldsCasting.addIngotRecipes();
         MoldsCasting.addNuggetRecipes();
         MoldsCasting.addPlateRecipes();
+        
+        GildedIron.registerGilding();
     }
 }

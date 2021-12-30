@@ -21,18 +21,12 @@ import tconstruct.smeltery.TinkerSmeltery;
 public class MoldsCasting {
 
 	public static void addPlateRecipes() {
-		String[] metals = new String[] {"copper","zinc","iron","gold","brass","thamium","terrasteel","elementium","fiery","lead","vibrant","enderium","gildedIron"};
+		String[] metals = new String[] {"copper","zinc","iron","gold","brass","thamium","terrasteel","elementium","fiery","lead","vibrant","enderium"};
 		for(int index : getPlates()) {
 			LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
 		    ItemStack scPlatecast = new ItemStack(SteamcraftItems.plateMold, 1, 0);
 		    ItemStack plate = new ItemStack(SteamcraftItems.steamcraftPlate, 1, index);
-			if(index==12) { //gilded plate casting
-				Fluid fluid = FluidRegistry.getFluid("gold.molten");
-				FluidStack fluidStack = new FluidStack(fluid, (int) (TConstruct.nuggetLiquidValue));
-				CastingRecipe recipe = tableCasting.getCastingRecipe(fluidStack, new ItemStack(SteamcraftItems.nuggetMold, 1, 0));
-				tableCasting.addCastingRecipe(plate, fluidStack, new ItemStack(SteamcraftItems.steamcraftPlate, 1, 2), true, recipe.coolTime);
-			}
-			else if (FluidRegistry.isFluidRegistered(metals[index] + ".molten")) {
+			if (FluidRegistry.isFluidRegistered(metals[index] + ".molten")) {
 				Fluid fluid = FluidRegistry.getFluid(metals[index] + ".molten");
 			    tableCasting.addCastingRecipe(plate, new FluidStack(fluid, (int) (TConstruct.ingotLiquidValue*0.6666F)), scPlatecast, 34);
 			    String oreString = "ingot"+metals[index].substring(0,1).toUpperCase()+metals[index].substring(1);
@@ -71,7 +65,6 @@ public class MoldsCasting {
         if (CrossMod.THERMAL_FOUNDATION) {
             list.add(11);
         }
-        list.add(12);
     	return list;
     }
 	
