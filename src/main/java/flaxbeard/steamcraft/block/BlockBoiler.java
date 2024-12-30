@@ -198,7 +198,7 @@ public class BlockBoiler extends BlockSteamTransporter implements IWrenchable {
         this.boilerOffIcon = ir.registerIcon("steamcraft:boiler");
         this.camoOnIcon = ir.registerIcon("steamcraft:boilerCamoOn");
         this.camoIcon = ir.registerIcon("steamcraft:boilerCamo");
-        //this.field_149936_O = p_149651_1_.registerIcon(this.field_149932_b ? "steamcraft:boilerOn" : "steamcraft:boiler");
+        //this.field_149936_O = ir.registerIcon(this.field_149932_b ? "steamcraft:boilerOn" : "steamcraft:boiler");
         this.field_149935_N = ir.registerIcon("steamcraft:blockBrass");
     }
 
@@ -237,7 +237,7 @@ public class BlockBoiler extends BlockSteamTransporter implements IWrenchable {
     	TileEntityBoiler tileEntity = (TileEntityBoiler) world.getTileEntity(x, y, z);
 
         boolean isClient = !world.isRemote;
-        
+
 	    if (!FluidHelper.playerIsHoldingWaterContainer(player) && isClient && tileEntity != null) {
     		player.openGui(Steamcraft.instance, 0, world, x, y, z);
         } else {

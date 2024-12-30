@@ -30,10 +30,10 @@ public class BlockEngineeringTable extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
-        this.blockIcon = p_149651_1_.registerIcon("furnace_side");
-        this.bottom = p_149651_1_.registerIcon("furnace_top");
-        this.top = p_149651_1_.registerIcon(this.getTextureName() + "_top");
+    public void registerBlockIcons(IIconRegister reg) {
+        this.blockIcon = reg.registerIcon("furnace_side");
+        this.bottom = reg.registerIcon("furnace_top");
+        this.top = reg.registerIcon(this.getTextureName() + "_top");
     }
 
     @Override

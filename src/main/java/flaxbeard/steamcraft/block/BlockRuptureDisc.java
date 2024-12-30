@@ -97,7 +97,7 @@ public class BlockRuptureDisc extends BlockContainer {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float p_149660_6_, float p_149660_7_, float p_149660_8_, int meta) {
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float subX, float subY, float subZ, int meta) {
         return (meta == 1 ? side + 10 : side);
     }
 
@@ -152,7 +152,7 @@ public class BlockRuptureDisc extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
         TileEntityRuptureDisc tile = (TileEntityRuptureDisc) world.getTileEntity(x, y, z);
         if (world.getBlockMetadata(x, y, z) > 9) {
             if (player.getHeldItem() != null) {

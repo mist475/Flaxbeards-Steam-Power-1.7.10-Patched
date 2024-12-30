@@ -33,7 +33,7 @@ public class BlockItemMortar extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float subX, float subY, float subZ) {
         TileEntityItemMortar tile = (TileEntityItemMortar) world.getTileEntity(x, y, z);
 
         if (player.getHeldItem() != null) {

@@ -24,8 +24,8 @@ public class BlockContainer extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
-        return myBlock.getIcon(p_149673_1_, p_149673_2_, p_149673_3_, p_149673_4_, p_149673_5_);
+    public IIcon getIcon(IBlockAccess worldIn, int x, int y, int z, int side) {
+        return myBlock.getIcon(worldIn, x, y, z, side);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class BlockContainer extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon func_149735_b(int p_149735_1_, int p_149735_2_) {
-        return myBlock.getIcon(p_149735_1_, p_149735_2_);
+    public IIcon func_149735_b(int side, int meta) {
+        return myBlock.getIcon(side, meta);
     }
 }

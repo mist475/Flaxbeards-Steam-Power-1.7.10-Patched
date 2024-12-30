@@ -137,10 +137,10 @@ public class TileEntityCustomFurnace extends TileEntityFurnace implements ISided
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-        if (this.furnaceItemStacks[p_70304_1_] != null) {
-            ItemStack itemstack = this.furnaceItemStacks[p_70304_1_];
-            this.furnaceItemStacks[p_70304_1_] = null;
+    public ItemStack getStackInSlotOnClosing(int index) {
+        if (this.furnaceItemStacks[index] != null) {
+            ItemStack itemstack = this.furnaceItemStacks[index];
+            this.furnaceItemStacks[index] = null;
             return itemstack;
         } else {
             return null;
@@ -150,8 +150,8 @@ public class TileEntityCustomFurnace extends TileEntityFurnace implements ISided
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int p_70299_1_, ItemStack stack) {
-        this.furnaceItemStacks[p_70299_1_] = stack;
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        this.furnaceItemStacks[index] = stack;
 
         if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
             stack.stackSize = this.getInventoryStackLimit();
@@ -378,8 +378,8 @@ public class TileEntityCustomFurnace extends TileEntityFurnace implements ISided
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : p_70300_1_.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -393,8 +393,8 @@ public class TileEntityCustomFurnace extends TileEntityFurnace implements ISided
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return p_94041_1_ == 2 ? false : (p_94041_1_ == 1 ? isItemFuel(p_94041_2_) : true);
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return index == 2 ? false : (index == 1 ? isItemFuel(stack) : true);
     }
 
     /**

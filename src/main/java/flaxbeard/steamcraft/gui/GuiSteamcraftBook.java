@@ -391,7 +391,7 @@ public class GuiSteamcraftBook extends GuiScreen {
 
     }
 
-    public void renderToolTip(ItemStack stack0, int p_146285_2_, int p_146285_3_, boolean renderHyperlink) {
+    public void renderToolTip(ItemStack stack0, int x, int y, boolean renderHyperlink) {
         List list = stack0.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
         this.zLevel = 1.0F;
         for (int k = 0; k < list.size(); ++k) {
@@ -410,16 +410,16 @@ public class GuiSteamcraftBook extends GuiScreen {
         }
 
         FontRenderer font = stack0.getItem().getFontRenderer(stack0);
-        this.func_146283_a(list, p_146285_2_, p_146285_3_);
-        drawHoveringText(list, p_146285_2_, p_146285_3_, (font == null ? fontRendererObj : font));
+        this.func_146283_a(list, x, y);
+        drawHoveringText(list, x, y, (font == null ? fontRendererObj : font));
         this.zLevel = 0.0F;
     }
 
-    public void renderText(String str, int p_146285_2_, int p_146285_3_) {
+    public void renderText(String str, int x, int y) {
         List list = new ArrayList<String>();
         list.add(I18n.format(str));
-        this.func_146283_a(list, p_146285_2_, p_146285_3_);
-        drawHoveringText(list, p_146285_2_, p_146285_3_, fontRendererObj);
+        this.func_146283_a(list, x, y);
+        drawHoveringText(list, x, y, fontRendererObj);
     }
 
     public void itemClicked(ItemStack itemStack) {
@@ -446,9 +446,9 @@ public class GuiSteamcraftBook extends GuiScreen {
         /**
          * Draws this button to the screen.
          */
-        public void drawButton(Minecraft minecraft, int p_146112_2_, int p_146112_3_) {
+        public void drawButton(Minecraft minecraft, int mouseX, int mouseY) {
             if (this.visible) {
-                boolean flag = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
+                boolean flag = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 minecraft.getTextureManager().bindTexture(GuiSteamcraftBook.bookGuiTextures);
                 int k = 0;

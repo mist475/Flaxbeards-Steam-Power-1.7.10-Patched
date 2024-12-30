@@ -29,7 +29,7 @@ public class BlockFishGenocideMachine extends BlockContainer {
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
+    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, int x, int y, int z)
     {
     	float px = 1.0F/16.0F;
         this.setBlockBounds(0.0F+3*px, 0.0F, 0.0F+3*px, 1.0F-3*px, 1.0F, 1.0F-3*px);
@@ -42,16 +42,16 @@ public class BlockFishGenocideMachine extends BlockContainer {
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    public IIcon getIcon(int side, int meta)
     {
-        return p_149691_1_ == 1 ? this.top : (p_149691_1_ == 0 ? this.top : this.blockIcon);
+        return side == 1 ? this.top : (side == 0 ? this.top : this.blockIcon);
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
+    public void registerBlockIcons(IIconRegister reg)
     {
-        this.blockIcon = p_149651_1_.registerIcon("steamcraft:blockBrass");
-        this.top =  p_149651_1_.registerIcon("steamcraft:blockBrass");
+        this.blockIcon = reg.registerIcon("steamcraft:blockBrass");
+        this.top =  reg.registerIcon("steamcraft:blockBrass");
     }
 
 	@Override

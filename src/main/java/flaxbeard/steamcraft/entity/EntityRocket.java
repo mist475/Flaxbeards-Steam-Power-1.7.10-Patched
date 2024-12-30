@@ -304,7 +304,7 @@ public class EntityRocket extends Entity {
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource source, float p_70097_2_) {
+    public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.isEntityInvulnerable()) {
             return false;
         } else {

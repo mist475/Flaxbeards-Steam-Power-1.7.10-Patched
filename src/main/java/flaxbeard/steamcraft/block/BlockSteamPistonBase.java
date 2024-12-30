@@ -183,17 +183,17 @@ public class BlockSteamPistonBase extends Block {
      * Gets the block's texture. Args: side, meta
      */
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_) {
-        int k = getPistonOrientation(p_149691_2_);
-        return k > 5 ? this.topIcon : (p_149691_1_ == k ? (!isExtended(p_149691_2_) && this.minX <= 0.0D && this.minY <= 0.0D && this.minZ <= 0.0D && this.maxX >= 1.0D && this.maxY >= 1.0D && this.maxZ >= 1.0D ? this.topIcon : this.innerTopIcon) : (p_149691_1_ == Facing.oppositeSide[k] ? this.bottomIcon : this.blockIcon));
+    public IIcon getIcon(int side, int meta) {
+        int k = getPistonOrientation(meta);
+        return k > 5 ? this.topIcon : (side == k ? (!isExtended(meta) && this.minX <= 0.0D && this.minY <= 0.0D && this.minZ <= 0.0D && this.maxX >= 1.0D && this.maxY >= 1.0D && this.maxZ >= 1.0D ? this.topIcon : this.innerTopIcon) : (side == Facing.oppositeSide[k] ? this.bottomIcon : this.blockIcon));
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
-        this.blockIcon = p_149651_1_.registerIcon("piston_side");
-        this.topIcon = p_149651_1_.registerIcon(this.isSticky ? "piston_top_sticky" : "piston_top_normal");
-        this.innerTopIcon = p_149651_1_.registerIcon("piston_inner");
-        this.bottomIcon = p_149651_1_.registerIcon("piston_bottom");
+    public void registerBlockIcons(IIconRegister reg) {
+        this.blockIcon = reg.registerIcon("piston_side");
+        this.topIcon = reg.registerIcon(this.isSticky ? "piston_top_sticky" : "piston_top_normal");
+        this.innerTopIcon = reg.registerIcon("piston_inner");
+        this.bottomIcon = reg.registerIcon("piston_bottom");
     }
 
     /**
@@ -207,19 +207,19 @@ public class BlockSteamPistonBase extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
         return false;
     }
 
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World p_149689_1_, int p_149689_2_, int p_149689_3_, int p_149689_4_, EntityLivingBase p_149689_5_, ItemStack p_149689_6_) {
-        int l = determineOrientation(p_149689_1_, p_149689_2_, p_149689_3_, p_149689_4_, p_149689_5_);
-        p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, l, 2);
+    public void onBlockPlacedBy(World worldIn, int x, int y, int z, EntityLivingBase placer, ItemStack itemIn) {
+        int l = determineOrientation(worldIn, x, y, z, placer);
+        worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
 
-        if (!p_149689_1_.isRemote) {
-            this.updatePistonState(p_149689_1_, p_149689_2_, p_149689_3_, p_149689_4_);
+        if (!worldIn.isRemote) {
+            this.updatePistonState(worldIn, x, y, z);
         }
     }
 
@@ -227,18 +227,18 @@ public class BlockSteamPistonBase extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor Block
      */
-    public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
-        if (!p_149695_1_.isRemote) {
-            this.updatePistonState(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_);
+    public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor) {
+        if (!worldIn.isRemote) {
+            this.updatePistonState(worldIn, x, y, z);
         }
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World p_149726_1_, int p_149726_2_, int p_149726_3_, int p_149726_4_) {
-        if (!p_149726_1_.isRemote && p_149726_1_.getTileEntity(p_149726_2_, p_149726_3_, p_149726_4_) == null) {
-            this.updatePistonState(p_149726_1_, p_149726_2_, p_149726_3_, p_149726_4_);
+    public void onBlockAdded(World worldIn, int x, int y, int z) {
+        if (!worldIn.isRemote && worldIn.getTileEntity(x, y, z) == null) {
+            this.updatePistonState(worldIn, x, y, z);
         }
     }
 
@@ -267,52 +267,52 @@ public class BlockSteamPistonBase extends Block {
         return p_150072_5_ != 0 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ - 1, p_150072_4_, 0) ? true : (p_150072_5_ != 1 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_, 1) ? true : (p_150072_5_ != 2 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_ - 1, 2) ? true : (p_150072_5_ != 3 && p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_ + 1, 3) ? true : (p_150072_5_ != 5 && p_150072_1_.getIndirectPowerOutput(p_150072_2_ + 1, p_150072_3_, p_150072_4_, 5) ? true : (p_150072_5_ != 4 && p_150072_1_.getIndirectPowerOutput(p_150072_2_ - 1, p_150072_3_, p_150072_4_, 4) ? true : (p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_, p_150072_4_, 0) ? true : (p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 2, p_150072_4_, 1) ? true : (p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_ - 1, 2) ? true : (p_150072_1_.getIndirectPowerOutput(p_150072_2_, p_150072_3_ + 1, p_150072_4_ + 1, 3) ? true : (p_150072_1_.getIndirectPowerOutput(p_150072_2_ - 1, p_150072_3_ + 1, p_150072_4_, 4) ? true : p_150072_1_.getIndirectPowerOutput(p_150072_2_ + 1, p_150072_3_ + 1, p_150072_4_, 5)))))))))));
     }
 
-    public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_) {
-        if (!p_149696_1_.isRemote) {
-            boolean flag = this.isIndirectlyPowered(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_6_);
+    public boolean onBlockEventReceived(World worldIn, int x, int y, int z, int eventId, int eventData) {
+        if (!worldIn.isRemote) {
+            boolean flag = this.isIndirectlyPowered(worldIn, x, y, z, eventData);
 
-            if (flag && p_149696_5_ == 1) {
-                p_149696_1_.setBlockMetadataWithNotify(p_149696_2_, p_149696_3_, p_149696_4_, p_149696_6_ | 8, 2);
+            if (flag && eventId == 1) {
+                worldIn.setBlockMetadataWithNotify(x, y, z, eventData | 8, 2);
                 return false;
             }
 
-            if (!flag && p_149696_5_ == 0) {
+            if (!flag && eventId == 0) {
                 return false;
             }
         }
 
-        if (p_149696_5_ == 0) {
-            if (!this.tryExtend(p_149696_1_, p_149696_2_, p_149696_3_, p_149696_4_, p_149696_6_)) {
+        if (eventId == 0) {
+            if (!this.tryExtend(worldIn, x, y, z, eventData)) {
                 return false;
             }
 
-            p_149696_1_.setBlockMetadataWithNotify(p_149696_2_, p_149696_3_, p_149696_4_, p_149696_6_ | 8, 2);
-            p_149696_1_.playSoundEffect((double) p_149696_2_ + 0.5D, (double) p_149696_3_ + 0.5D, (double) p_149696_4_ + 0.5D, "tile.piston.out", 0.5F, p_149696_1_.rand.nextFloat() * 0.25F + 0.6F);
-        } else if (p_149696_5_ == 1) {
-            TileEntity tileentity1 = p_149696_1_.getTileEntity(p_149696_2_ + Facing.offsetsXForSide[p_149696_6_], p_149696_3_ + Facing.offsetsYForSide[p_149696_6_], p_149696_4_ + Facing.offsetsZForSide[p_149696_6_]);
+            worldIn.setBlockMetadataWithNotify(x, y, z, eventData | 8, 2);
+            worldIn.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "tile.piston.out", 0.5F, worldIn.rand.nextFloat() * 0.25F + 0.6F);
+        } else if (eventId == 1) {
+            TileEntity tileentity1 = worldIn.getTileEntity(x + Facing.offsetsXForSide[eventData], y + Facing.offsetsYForSide[eventData], z + Facing.offsetsZForSide[eventData]);
 
             if (tileentity1 instanceof TileEntitySteamPiston) {
                 ((TileEntitySteamPiston) tileentity1).clearPistonTileEntity();
             }
 
-            p_149696_1_.setBlock(p_149696_2_, p_149696_3_, p_149696_4_, SteamcraftBlocks.steamPiston_extension, p_149696_6_, 3);
-            p_149696_1_.setTileEntity(p_149696_2_, p_149696_3_, p_149696_4_, BlockPistonMoving.getTileEntity(this, p_149696_6_, p_149696_6_, false, true));
+            worldIn.setBlock(x, y, z, SteamcraftBlocks.steamPiston_extension, eventData, 3);
+            worldIn.setTileEntity(x, y, z, BlockPistonMoving.getTileEntity(this, eventData, eventData, false, true));
 
             if (this.isSticky) {
-                int j1 = p_149696_2_ + Facing.offsetsXForSide[p_149696_6_] * 2;
-                int k1 = p_149696_3_ + Facing.offsetsYForSide[p_149696_6_] * 2;
-                int l1 = p_149696_4_ + Facing.offsetsZForSide[p_149696_6_] * 2;
-                Block block = p_149696_1_.getBlock(j1, k1, l1);
-                int i2 = p_149696_1_.getBlockMetadata(j1, k1, l1);
+                int j1 = x + Facing.offsetsXForSide[eventData] * 2;
+                int k1 = y + Facing.offsetsYForSide[eventData] * 2;
+                int l1 = z + Facing.offsetsZForSide[eventData] * 2;
+                Block block = worldIn.getBlock(j1, k1, l1);
+                int i2 = worldIn.getBlockMetadata(j1, k1, l1);
                 boolean flag1 = false;
 
                 if (block == SteamcraftBlocks.steamPiston_extension) {
-                    TileEntity tileentity = p_149696_1_.getTileEntity(j1, k1, l1);
+                    TileEntity tileentity = worldIn.getTileEntity(j1, k1, l1);
 
                     if (tileentity instanceof TileEntitySteamPiston) {
                         TileEntitySteamPiston TileEntitySteamPiston = (TileEntitySteamPiston) tileentity;
 
-                        if (TileEntitySteamPiston.getPistonOrientation() == p_149696_6_ && TileEntitySteamPiston.isExtending()) {
+                        if (TileEntitySteamPiston.getPistonOrientation() == eventData && TileEntitySteamPiston.isExtending()) {
                             TileEntitySteamPiston.clearPistonTileEntity();
                             block = TileEntitySteamPiston.getStoredBlockID();
                             i2 = TileEntitySteamPiston.getBlockMetadata();
@@ -321,21 +321,21 @@ public class BlockSteamPistonBase extends Block {
                     }
                 }
 
-                if (!flag1 && block.getMaterial() != Material.air && canPushBlock(block, p_149696_1_, j1, k1, l1, false) && (block.getMobilityFlag() == 0 || block == SteamcraftBlocks.steamPiston)) {
-                    p_149696_2_ += Facing.offsetsXForSide[p_149696_6_];
-                    p_149696_3_ += Facing.offsetsYForSide[p_149696_6_];
-                    p_149696_4_ += Facing.offsetsZForSide[p_149696_6_];
-                    p_149696_1_.setBlock(p_149696_2_, p_149696_3_, p_149696_4_, SteamcraftBlocks.steamPiston_extension, i2, 3);
-                    p_149696_1_.setTileEntity(p_149696_2_, p_149696_3_, p_149696_4_, BlockPistonMoving.getTileEntity(block, i2, p_149696_6_, false, false));
-                    p_149696_1_.setBlockToAir(j1, k1, l1);
+                if (!flag1 && block.getMaterial() != Material.air && canPushBlock(block, worldIn, j1, k1, l1, false) && (block.getMobilityFlag() == 0 || block == SteamcraftBlocks.steamPiston)) {
+                    x += Facing.offsetsXForSide[eventData];
+                    y += Facing.offsetsYForSide[eventData];
+                    z += Facing.offsetsZForSide[eventData];
+                    worldIn.setBlock(x, y, z, SteamcraftBlocks.steamPiston_extension, i2, 3);
+                    worldIn.setTileEntity(x, y, z, BlockPistonMoving.getTileEntity(block, i2, eventData, false, false));
+                    worldIn.setBlockToAir(j1, k1, l1);
                 } else if (!flag1) {
-                    p_149696_1_.setBlockToAir(p_149696_2_ + Facing.offsetsXForSide[p_149696_6_], p_149696_3_ + Facing.offsetsYForSide[p_149696_6_], p_149696_4_ + Facing.offsetsZForSide[p_149696_6_]);
+                    worldIn.setBlockToAir(x + Facing.offsetsXForSide[eventData], y + Facing.offsetsYForSide[eventData], z + Facing.offsetsZForSide[eventData]);
                 }
             } else {
-                p_149696_1_.setBlockToAir(p_149696_2_ + Facing.offsetsXForSide[p_149696_6_], p_149696_3_ + Facing.offsetsYForSide[p_149696_6_], p_149696_4_ + Facing.offsetsZForSide[p_149696_6_]);
+                worldIn.setBlockToAir(x + Facing.offsetsXForSide[eventData], y + Facing.offsetsYForSide[eventData], z + Facing.offsetsZForSide[eventData]);
             }
 
-            p_149696_1_.playSoundEffect((double) p_149696_2_ + 0.5D, (double) p_149696_3_ + 0.5D, (double) p_149696_4_ + 0.5D, "tile.piston.in", 0.5F, p_149696_1_.rand.nextFloat() * 0.15F + 0.6F);
+            worldIn.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "tile.piston.in", 0.5F, worldIn.rand.nextFloat() * 0.15F + 0.6F);
         }
 
         return true;
@@ -344,8 +344,8 @@ public class BlockSteamPistonBase extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
-        int l = p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_);
+    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, int x, int y, int z) {
+        int l = worldIn.getBlockMetadata(x, y, z);
 
         if (isExtended(l)) {
             float f = 0.25F;
@@ -385,18 +385,18 @@ public class BlockSteamPistonBase extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_, AxisAlignedBB p_149743_5_, List p_149743_6_, Entity p_149743_7_) {
+    public void addCollisionBoxesToList(World worldIn, int x, int y, int z, AxisAlignedBB mask, List list, Entity collider) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-        super.addCollisionBoxesToList(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_, p_149743_5_, p_149743_6_, p_149743_7_);
+        super.addCollisionBoxesToList(worldIn, x, y, z, mask, list, collider);
     }
 
     /**
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
-        this.setBlockBoundsBasedOnState(p_149668_1_, p_149668_2_, p_149668_3_, p_149668_4_);
-        return super.getCollisionBoundingBoxFromPool(p_149668_1_, p_149668_2_, p_149668_3_, p_149668_4_);
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World worldIn, int x, int y, int z) {
+        this.setBlockBoundsBasedOnState(worldIn, x, y, z);
+        return super.getCollisionBoundingBoxFromPool(worldIn, x, y, z);
     }
 
     /**

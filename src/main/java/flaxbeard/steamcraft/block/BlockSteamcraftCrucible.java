@@ -134,9 +134,9 @@ public class BlockSteamcraftCrucible extends BlockContainer implements IWrenchab
     }
 
     @Override
-    public void onBlockPlacedBy(World p_149689_1_, int p_149689_2_, int p_149689_3_, int p_149689_4_, EntityLivingBase p_149689_5_, ItemStack p_149689_6_) {
-        int l = MathHelper.floor_double((double) (p_149689_5_.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, l, 2);
+    public void onBlockPlacedBy(World worldIn, int x, int y, int z, EntityLivingBase placer, ItemStack itemIn) {
+        int l = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class BlockSteamcraftCrucible extends BlockContainer implements IWrenchab
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
         if (!player.isSneaking() && player.getHeldItem() == null) {
             TileEntityCrucible tile = (TileEntityCrucible) world.getTileEntity(x, y, z);
             if (!tile.isTipping()) {

@@ -157,9 +157,9 @@ public class BlockFluidSteamConverter extends BlockSteamTransporter implements I
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
-        this.blockIcon = p_149651_1_.registerIcon("steamcraft:blockBrass");
-        this.sideIcon = p_149651_1_.registerIcon("steamcraft:blockBrass" + "_pipe");
+    public void registerBlockIcons(IIconRegister reg) {
+        this.blockIcon = reg.registerIcon("steamcraft:blockBrass");
+        this.sideIcon = reg.registerIcon("steamcraft:blockBrass" + "_pipe");
 
     }
 

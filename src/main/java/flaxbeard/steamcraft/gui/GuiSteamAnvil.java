@@ -79,7 +79,7 @@ public class GuiSteamAnvil extends GuiContainer implements ICrafting {
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_BLEND);
         this.fontRendererObj.drawString(I18n.format("container.repair"), 60, 6, 4210752);
@@ -165,7 +165,7 @@ public class GuiSteamAnvil extends GuiContainer implements ICrafting {
         this.field_147091_w.drawTextBox();
     }
 
-    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(field_147093_u);
         int k = (this.width - this.xSize) / 2;
