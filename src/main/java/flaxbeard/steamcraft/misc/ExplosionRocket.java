@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import java.util.*;
 
 public class ExplosionRocket extends Explosion {
-    private static final String __OBFID = "CL_00000134";
     /**
      * whether or not the explosion sets fire to blocks around it
      */

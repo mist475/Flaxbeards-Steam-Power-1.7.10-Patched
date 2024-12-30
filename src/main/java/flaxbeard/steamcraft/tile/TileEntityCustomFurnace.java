@@ -27,7 +27,6 @@ public class TileEntityCustomFurnace extends TileEntityFurnace implements ISided
     private static final int[] slotsTop = new int[]{0};
     private static final int[] slotsBottom = new int[]{2, 1};
     private static final int[] slotsSides = new int[]{1};
-    private static final String __OBFID = "CL_00000357";
     public Block disguiseBlock = null;
     public int disguiseMeta = 0;
     /**

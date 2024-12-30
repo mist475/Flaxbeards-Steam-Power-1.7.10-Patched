@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Config {
 
     //Don't change this string. - @xbony2
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = FSPVersion.VERSION;
 
     public static final int JUMP_BOOST_CONSUMPTION_DEFAULT = 10;
     public static final int JETPACK_CONSUMPTION_DEFAULT = 10;

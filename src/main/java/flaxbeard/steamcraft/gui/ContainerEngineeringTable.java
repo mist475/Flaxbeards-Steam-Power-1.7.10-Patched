@@ -43,7 +43,6 @@ public class ContainerEngineeringTable extends Container {
             final int k = i;
             this.addSlotToContainer(new Slot(par1InventoryPlayer, par1InventoryPlayer.getSizeInventory() - 1 - i, 8, 8 + i * 18) {
                 private EntityPlayer player = inv.player;
-                private static final String __OBFID = "CL_00001755";
 
                 /**
                  * Returns the maximum stack size for a given slot (usually the same as getInventoryStackLimit(), but 1

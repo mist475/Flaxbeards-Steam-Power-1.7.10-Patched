@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityRocket extends Entity {
-    private static final String __OBFID = "CL_00001717"; //<- wtf is that? -xbony2
     protected static Random itemRand = new Random();
     public boolean inGround;
     public EntityLivingBase shootingEntity;
@@ -85,7 +84,7 @@ public class EntityRocket extends Entity {
     /**
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
      * length * 64 * renderDistanceWeight
-     * 
+     *
      * @param distance
      */
     @SideOnly(Side.CLIENT)

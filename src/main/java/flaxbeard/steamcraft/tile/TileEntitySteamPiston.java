@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TileEntitySteamPiston extends TileEntity {
-    private static final String __OBFID = "CL_00000369";
     private Block storedBlock;
     private int storedMetadata;
     /**

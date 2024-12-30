@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class GuiButtonUpdate extends GuiButton {
-    private static final String __OBFID = "CL_00000672";
     private static ResourceLocation book = new ResourceLocation("steamcraft:textures/items/book.png");
 
     public GuiButtonUpdate(int par1, int par2, int par3) {

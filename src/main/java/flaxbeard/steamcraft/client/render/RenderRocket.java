@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderRocket extends Render {
     private static final ResourceLocation arrowTextures = new ResourceLocation("steamcraft:textures/models/rocket.png");
-    private static final String __OBFID = "CL_00000978";
 
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then

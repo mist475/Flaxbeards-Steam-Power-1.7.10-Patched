@@ -27,7 +27,6 @@ import java.util.Map;
 
 public class ContainerSteamAnvil extends Container {
     private static final Logger logger = LogManager.getLogger();
-    private static final String __OBFID = "CL_00001732";
     /**
      * The player that has this container open.
      */

@@ -42,7 +42,6 @@ public class GuiSteamcraftBook extends GuiScreen {
     /**
      * The GuiButton to sign this book.
      */
-    private static final String __OBFID = "CL_00000744";
     public static int bookTotalPages = 1;
     public static int currPage = 0;
     public static int lastIndexPage = 0;
@@ -437,7 +436,6 @@ public class GuiSteamcraftBook extends GuiScreen {
 
     @SideOnly(Side.CLIENT)
     public static class NextPageButton extends GuiButton {
-        private static final String __OBFID = "CL_00000745";
         private final boolean field_146151_o;
 
         public NextPageButton(int par1, int par2, int par3, boolean par4) {

@@ -1,81 +1,29 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net/"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.0.+') {
-            changing = true
-        }
-    }
-}
 
 plugins {
-    id 'java-library'
-    id 'maven-publish'
+    id 'com.gtnewhorizons.gtnhconvention'
 }
 
-apply plugin: 'forge'
-apply plugin: 'java'
-
-version = newFSPVersion
-
-if (project.hasProperty('dev')) {
-	def git = org.ajoberstar.grgit.Grgit.open(file('.'))
-	project.version = project.version + '-' + git.head().abbreviatedId + '-dev'
-}
-
-group = "com.flaxbeard.Steamcraft"
-archivesBaseName = "FSP-1.7.10"
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-minecraft {
-	version = forgeVersion
-	runDir = "eclipse"
-	replace "@VERSION@", project.version
-}
-
-repositories {
-	maven {
-		url "https://cursemaven.com"
-	}
-	maven {
-        url = "https://jitpack.io"
-    }
-}
-
-dependencies {
-	compile "curse.maven:industrial-craft-242638:2353971"
-	compile "curse.maven:endercore-231868:2331048"
-	compile "curse.maven:ender-io-64578:2322348"
-	compile "curse.maven:natura-74120:2216125"
-	compile "com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev"
-	compile "curse.maven:tinkers-construct-74072:2264246"
-	compile "curse.maven:mantle-74924:2264244"
-
-	compile fileTree(dir: 'fsplib', include: '*.jar') // Avoiding using the generic "lib".
-}
-
+// Due to the layout of the resources repository some extra resource processing is required
 processResources {
-	from(sourceSets.main.resources.srcDirs) {
-		include 'mcmod.info'
-		filter {
-			it.replaceAll('@VERSION@', project.version)
-		}
-	}
-
-    from(sourceSets.main.resources.srcDirs) {
-		exclude 'mcmod.info'
-		exclude 'api'
-		include 'steamcraft/api'
+    // replace the version number in the resources repository
+    from("src${File.separator}main${File.separator}resources${File.separator}src${File.separator}main${File.separator}resources") {
+        include 'mcmod.info'
+        into ""
+        filter {
+            it.replaceAll('@VERSION@', project.version)
+        }
     }
+    // copy the resource files located in the src/main/resources file to root of jar and exclude original dir
+    from("src${File.separator}main${File.separator}resources${File.separator}src${File.separator}main${File.separator}resources") {
+        into ""
+        // already handled above
+        exclude("mcmod.info")
+    }
+    exclude("src")
+    exclude("README.md")
+}
+
+// hack to prevent unneeded files in jar
+jar {
+    exclude("resources")
 }
