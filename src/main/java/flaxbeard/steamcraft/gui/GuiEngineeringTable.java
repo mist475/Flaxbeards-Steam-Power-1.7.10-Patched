@@ -40,7 +40,7 @@ public class GuiEngineeringTable extends GuiContainer {
         this.mc.getTextureManager().bindTexture(furnaceGuiTextures);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         //this.inventorySlots = new ContainerEngineeringTable(inv, furnaceInventory);
 

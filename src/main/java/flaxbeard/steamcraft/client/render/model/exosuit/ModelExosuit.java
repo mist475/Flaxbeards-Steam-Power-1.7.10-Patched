@@ -346,7 +346,7 @@ public class ModelExosuit extends ModelBiped {
         horn1a.addBox(-3.0F, -1.5F, -1.5F, 3, 3, 3);
         horn1a.setRotationPoint(-4.5F, height, -1.0F);
         horn1a.rotateAngleY = -0.5235988F;
-        horn1a.rotateAngleZ = (zangle / 57.295776F);
+        horn1a.rotateAngleZ = (zangle / (180F / (float)Math.PI));
         this.bipedHead.addChild(horn1a);
         hornParts[0] = horn1a;
 
@@ -354,7 +354,7 @@ public class ModelExosuit extends ModelBiped {
         horn1b.addBox(-4.0F, -1.0F, -1.0F, 5, 2, 2);
         horn1b.setRotationPoint(-3.0F, 0.0F, 0.0F);
         horn1b.rotateAngleY = -0.3490659F;
-        horn1b.rotateAngleZ = (zangle / 57.295776F);
+        horn1b.rotateAngleZ = (zangle / (180F / (float)Math.PI));
         horn1a.addChild(horn1b);
         hornParts[1] = horn1b;
 
@@ -362,7 +362,7 @@ public class ModelExosuit extends ModelBiped {
         horn2a.addBox(0.0F, -1.5F, -1.5F, 3, 3, 3);
         horn2a.setRotationPoint(4.5F, height, -1.0F);
         horn2a.rotateAngleY = 0.5235988F;
-        horn2a.rotateAngleZ = (-zangle / 57.295776F);
+        horn2a.rotateAngleZ = (-zangle / (180F / (float)Math.PI));
         this.bipedHead.addChild(horn2a);
         hornParts[2] = horn2a;
 
@@ -370,7 +370,7 @@ public class ModelExosuit extends ModelBiped {
         horn2b.addBox(-1.0F, -1.0F, -1.0F, 5, 2, 2);
         horn2b.setRotationPoint(3.0F, 0.0F, 0.0F);
         horn2b.rotateAngleY = 0.3490659F;
-        horn2b.rotateAngleZ = (-zangle / 57.295776F);
+        horn2b.rotateAngleZ = (-zangle / (180F / (float)Math.PI));
         horn2a.addChild(horn2b);
         hornParts[3] = horn2b;
         return hornParts;

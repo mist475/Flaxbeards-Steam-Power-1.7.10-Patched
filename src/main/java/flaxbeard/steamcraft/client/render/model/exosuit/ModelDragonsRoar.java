@@ -40,7 +40,7 @@ public class ModelDragonsRoar extends ModelExosuitUpgrade {
         this.FinL = new ModelRenderer(this, 16, 25);
         this.FinL.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.FinL.addBox(-4.0F, -7.7F, -1.8F, 1, 1, 6, 0.2F);
-        this.setRotateAngle(FinL, 0.2617993877991494F, 0.0F, 0.7853981633974483F);
+        this.setRotateAngle(FinL, 0.2617993877991494F, 0.0F, ((float)Math.PI / 4F));
         
         this.Snoot = new ModelRenderer(this, 24, 16);
         this.Snoot.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -51,22 +51,22 @@ public class ModelDragonsRoar extends ModelExosuitUpgrade {
         this.FinR.mirror = true;
         this.FinR.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.FinR.addBox(3.0F, -7.7F, -1.8F, 1, 1, 6, 0.2F);
-        this.setRotateAngle(FinR, 0.2617993877991494F, 0.0F, -0.7853981633974483F);
+        this.setRotateAngle(FinR, 0.2617993877991494F, 0.0F, -((float)Math.PI / 4F));
         
         this.CheekFinR = new ModelRenderer(this, 0, 25);
         this.CheekFinR.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.CheekFinR.addBox(-3.9F, 2.7F, -2.6F, 2, 2, 6, 0.2F);
-        this.setRotateAngle(CheekFinR, -0.2617993877991494F, 0.0F, 1.5707963267948966F);
+        this.setRotateAngle(CheekFinR, -0.2617993877991494F, 0.0F, ((float)Math.PI / 2F));
         
         this.Jaw = new ModelRenderer(this, 0, 16);
         this.Jaw.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.Jaw.addBox(-3.0F, 0.0F, -7.5F, 6, 3, 6, -0.1F);
-        this.setRotateAngle(Jaw, -0.3490658503988659F, 0.0F, 3.141592653589793F);
+        this.setRotateAngle(Jaw, -0.3490658503988659F, 0.0F, (float)Math.PI);
         
         this.CheekFinL = new ModelRenderer(this, 0, 25);
         this.CheekFinL.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.CheekFinL.addBox(-3.9F, -4.7F, -2.6F, 2, 2, 6, 0.2F);
-        this.setRotateAngle(CheekFinL, 0.2617993877991494F, 0.0F, 1.5707963267948966F);
+        this.setRotateAngle(CheekFinL, 0.2617993877991494F, 0.0F, ((float)Math.PI / 2F));
         this.TopJaw.addChild(this.Snoot);
         this.TopJaw.addChild(this.Jaw);
     }
